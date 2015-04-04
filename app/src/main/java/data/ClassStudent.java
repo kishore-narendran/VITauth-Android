@@ -3,11 +3,11 @@ package data;
 public class ClassStudent {
 
     private String registerNumber;
-    private Boolean debarred;
+    private boolean debarred;
     private String seat;
 
-    private Boolean attendance;
-    private Boolean malpractice;
+    private boolean attendance;
+    private boolean malpractice;
     private String remarks;
 
     public ClassStudent(String registerNumber, Boolean debarred, String seat) {

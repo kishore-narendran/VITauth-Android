@@ -1,12 +1,11 @@
 package data;
 
-import java.util.List;
-
 public class Class {
-    private Integer classNumber;
-    private List classStudents;
 
-    public Class(Integer classNumber, List classStudents) {
+    private int classNumber;
+    private ClassStudent classStudents[];
+
+    public Class(Integer classNumber, ClassStudent[] classStudents) {
         this.classNumber = classNumber;
         this.classStudents = classStudents;
     }
@@ -15,7 +14,7 @@ public class Class {
         return classNumber;
     }
 
-    public List getClassStudents() {
+    public ClassStudent[] getClassStudents() {
         return classStudents;
     }
 }

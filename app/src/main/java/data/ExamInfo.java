@@ -1,17 +1,15 @@
 package data;
 
-import java.util.List;
-
 public class ExamInfo {
 
-    private List classes;
+    private Class[] classes;
     private String exam;
     private String semester;
     private String slot;
     private String time;
     private String venue;
 
-    public ExamInfo(String semester, String exam, String slot, String venue, String time, List classes) {
+    public ExamInfo(String semester, String exam, String slot, String venue, String time, Class[] classes) {
         this.classes = classes;
         this.exam = exam;
         this.semester = semester;
@@ -20,7 +18,7 @@ public class ExamInfo {
         this.venue = venue;
     }
 
-    public List getClasses() {
+    public Class[] getClasses() {
         return classes;
     }
 
