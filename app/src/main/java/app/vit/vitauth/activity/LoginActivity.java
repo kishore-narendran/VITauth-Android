@@ -6,18 +6,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.vit.vitauth.R;
-import app.vit.vitauth.fragment.HomeFragment;
+import app.vit.vitauth.fragment.LoginFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class LoginActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new HomeFragment())
+                    .add(R.id.container, new LoginFragment())
                     .commit();
         }
     }

@@ -8,15 +8,15 @@ import android.view.ViewGroup;
 
 import app.vit.vitauth.R;
 
-public class HomeFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
-    public HomeFragment() {
+    public LoginFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         return rootView;
     }
 }
