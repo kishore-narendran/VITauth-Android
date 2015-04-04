@@ -1,6 +1,6 @@
 package data;
 
-public class ClassStudents {
+public class ClassStudent {
 
     private String registerNumber;
     private Boolean debarred;
@@ -10,7 +10,7 @@ public class ClassStudents {
     private Boolean malpractice;
     private String remarks;
 
-    public ClassStudents(String registerNumber, Boolean debarred, String seat) {
+    public ClassStudent(String registerNumber, Boolean debarred, String seat) {
         this.registerNumber = registerNumber;
         this.debarred = debarred;
         this.seat = seat;
