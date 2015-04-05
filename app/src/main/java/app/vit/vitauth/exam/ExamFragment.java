@@ -1,4 +1,4 @@
-package app.vit.vitauth.fragment;
+package app.vit.vitauth.exam;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import app.vit.vitauth.R;
-import app.vit.vitauth.adapter.ExamListAdapter;
 import data.Class;
 import data.ClassStudent;
 import data.ExamInfo;
