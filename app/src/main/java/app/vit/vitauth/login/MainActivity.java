@@ -1,4 +1,4 @@
-package app.vit.vitauth.activity;
+package app.vit.vitauth.login;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import app.vit.vitauth.R;
-import app.vit.vitauth.fragment.HomeFragment;
 
 
 public class MainActivity extends ActionBarActivity {
