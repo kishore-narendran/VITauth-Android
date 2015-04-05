@@ -28,7 +28,13 @@ public class ExamFragment extends Fragment {
     private ExamListAdapter examListAdapter;
 
     public ExamFragment() {
-        // Intent intent = getActivity().getIntent();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra("exam_info")) {
             examInfo = (ExamInfo) intent.getExtras().getSerializable("exam_info");
             classes = examInfo.getClasses();
@@ -38,11 +44,6 @@ public class ExamFragment extends Fragment {
             classes[1] = new Class(3663, "CSE305", "Computer Networks", new ClassStudent[2]);
             classes[2] = new Class(4687, "CSE319", "Database Systems", new ClassStudent[2]);
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_exam, container, false);
 
