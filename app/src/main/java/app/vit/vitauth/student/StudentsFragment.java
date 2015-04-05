@@ -1,4 +1,4 @@
-package app.vit.vitauth.fragment;
+package app.vit.vitauth.student;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import app.vit.vitauth.R;
-import app.vit.vitauth.adapters.ListStudentsAdapter;
 import data.ListItemStudent;
 
 public class StudentsFragment extends Fragment {

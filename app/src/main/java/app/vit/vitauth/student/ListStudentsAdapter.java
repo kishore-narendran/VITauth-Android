@@ -1,4 +1,4 @@
-package app.vit.vitauth.adapters;
+package app.vit.vitauth.student;
 
 import android.content.Context;
 import android.view.LayoutInflater;
