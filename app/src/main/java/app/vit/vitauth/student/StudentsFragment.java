@@ -15,7 +15,7 @@ import data.ListItemStudent;
 
 public class StudentsFragment extends Fragment {
 
-    public ListStudentsAdapter myListStudentsAdapter;
+    public StudentsListAdapter myStudentsListAdapter;
     public StudentsFragment() {
     }
 
@@ -32,11 +32,11 @@ public class StudentsFragment extends Fragment {
         students[5] = new ListItemStudent("11BCE0088", "Sreeram Boyapati");
 
         ArrayList<ListItemStudent> students1 = new ArrayList<>(Arrays.asList(students));
-        myListStudentsAdapter = new ListStudentsAdapter(getActivity(), students1);
+        myStudentsListAdapter = new StudentsListAdapter(getActivity(), students1);
 
         View rootView = inflater.inflate(R.layout.fragment_students, container, false);
         ListView listView = (ListView) rootView.findViewById(R.id.listview_students);
-        listView.setAdapter(myListStudentsAdapter);
+        listView.setAdapter(myStudentsListAdapter);
 
         return rootView;
     }

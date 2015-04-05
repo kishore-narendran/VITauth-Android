@@ -15,12 +15,12 @@ import data.ListItemStudent;
 /**
  * Created by kishore on 5/4/15.
  */
-public class ListStudentsAdapter extends ArrayAdapter<ListItemStudent> {
+public class StudentsListAdapter extends ArrayAdapter<ListItemStudent> {
 
     private final Context context;
     private final ArrayList<ListItemStudent> itemsArrayList;
 
-    public ListStudentsAdapter(Context context, ArrayList<ListItemStudent> itemsArrayList) {
+    public StudentsListAdapter(Context context, ArrayList<ListItemStudent> itemsArrayList) {
 
         super(context, R.layout.list_item_students, itemsArrayList);
 

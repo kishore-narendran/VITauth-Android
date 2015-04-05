@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import app.vit.vitauth.R;
+import app.vit.vitauth.student.StudentsActivity;
 import data.Class;
 import data.ClassStudent;
 import data.ExamInfo;
@@ -56,12 +56,8 @@ public class ExamFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Class classInfo = classes[position];
-                Toast.makeText(getActivity().getApplicationContext(), classInfo.getTitle(),
-                        Toast.LENGTH_LONG).show();
-
-                // Intent intent = new Intent(getActivity(), StudentsActivity.class).putExtras("exam_info", examInfo);
-                // startActivity(intent);
+                Intent intent = new Intent(getActivity(), StudentsActivity.class);
+                startActivity(intent);
             }
         });
 
