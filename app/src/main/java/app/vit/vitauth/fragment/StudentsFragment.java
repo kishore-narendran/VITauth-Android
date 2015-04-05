@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 import app.vit.vitauth.R;
 import app.vit.vitauth.adapters.ListStudentsAdapter;
-import app.vit.vitauth.data.ListItemStudent;
+import data.ListItemStudent;
 
 public class StudentsFragment extends Fragment {
 

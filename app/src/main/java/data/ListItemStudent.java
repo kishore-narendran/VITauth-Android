@@ -1,4 +1,4 @@
-package app.vit.vitauth.data;
+package data;
 
 /**
  * Created by kishore on 5/4/15.
