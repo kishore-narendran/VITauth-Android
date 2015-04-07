@@ -1,124 +1,119 @@
-<ScrollView
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".MainActivity$PlaceholderFragment"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/employeeID"
-        android:text="Employee ID:"/>
-
-    <EditText
-        android:id="@+id/employeeID"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:imeOptions="actionSend"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        android:orientation="vertical"
+        tools:context=".MainActivity$PlaceholderFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/building"
-        android:text="Building:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/employeeID"
+            android:text="Employee ID:" />
 
-    <Spinner
-        android:id="@+id/building"
-        android:entries="@array/building"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        <EditText
+            android:id="@+id/employeeID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSend"
+            android:inputType="number"
+            android:padding="@dimen/abc_button_padding_horizontal_material" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/roomNumber"
-        android:text="Room Number:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/building"
+            android:text="Building:" />
 
-    <EditText
-        android:id="@+id/roomNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:imeOptions="actionSend"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        <Spinner
+            android:id="@+id/building"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/building"
+            android:padding="@dimen/abc_button_padding_horizontal_material"
+            android:spinnerMode="dropdown" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/examination"
-        android:text="Examination Type:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/roomNumber"
+            android:text="Room Number:" />
 
-    <Spinner
-        android:entries="@array/examinationType"
-        android:id="@+id/examination"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        <EditText
+            android:id="@+id/roomNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            android:padding="@dimen/abc_button_padding_horizontal_material" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/examination"
+            android:text="Examination Type:" />
+
+        <Spinner
+            android:id="@+id/examination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/examinationType"
+            android:padding="@dimen/abc_button_padding_horizontal_material"
+            android:spinnerMode="dropdown" />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/examinationSlot"
-        android:text="Examination Slot:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/examinationSlot"
+            android:text="Examination Slot:" />
 
-    <Spinner
-        android:entries="@array/examinationSlot"
-        android:id="@+id/examinationSlot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        <Spinner
+            android:id="@+id/examinationSlot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/examinationSlot"
+            android:padding="@dimen/abc_button_padding_horizontal_material"
+            android:spinnerMode="dropdown" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/examination_time"
-        android:text="Examination Time:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/examination_time"
+            android:text="Examination Time:" />
 
-    <Spinner
-        android:entries="@array/examinationTime"
-        android:id="@+id/examination_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        <Spinner
+            android:id="@+id/examination_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/examinationTime"
+            android:padding="@dimen/abc_button_padding_horizontal_material"
+            android:spinnerMode="dropdown" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/semester"
-        android:text="Semester Type"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/semester"
+            android:text="Semester Type" />
 
-    <Spinner
-        android:entries="@array/semesterType"
-        android:id="@+id/semester"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:padding="@dimen/abc_button_padding_horizontal_material"/>
+        <Spinner
+            android:id="@+id/semester"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/semesterType"
+            android:padding="@dimen/abc_button_padding_horizontal_material"
+            android:spinnerMode="dropdown" />
 
-    <Button
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/login_button"
-        android:text="@string/Login"/>
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/Login" />
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>
