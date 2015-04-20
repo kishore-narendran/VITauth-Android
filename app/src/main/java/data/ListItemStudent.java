@@ -1,8 +1,7 @@
 package data;
 
-/**
- * Created by kishore on 5/4/15.
- */
+// TODO replace this class with ClassStudent
+
 public class ListItemStudent {
 
     String regno;
