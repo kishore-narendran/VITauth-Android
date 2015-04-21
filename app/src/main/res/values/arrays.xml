@@ -12,9 +12,9 @@
     </string-array>
 
     <string-array name="examinationType">
-        <item>CAT 1</item>
-        <item>CAT 2</item>
-        <item>TERM END EXAMINATION</item>
+        <item>CAT1</item>
+        <item>CAT2</item>
+        <item>TEE</item>
     </string-array>
 
     <string-array name="examinationSlot">
@@ -35,13 +35,13 @@
     </string-array>
 
     <string-array name="examinationTime">
-        <item>FORENOON</item>
-        <item>EVENING</item>
+        <item>forenoon</item>
+        <item>afternoon</item>
     </string-array>
 
     <string-array name="semesterType">
-        <item>FALL SEMESTER</item>
-        <item>WINTER SEMESTER</item>
+        <item>FS14</item>
+        <item>WS14</item>
     </string-array>
 
 </resources>

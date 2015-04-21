@@ -83,11 +83,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:labelFor="@+id/examination_time"
+            android:labelFor="@+id/examinationTime"
             android:text="Examination Time:" />
 
         <Spinner
-            android:id="@+id/examination_time"
+            android:id="@+id/examinationTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/examinationTime"

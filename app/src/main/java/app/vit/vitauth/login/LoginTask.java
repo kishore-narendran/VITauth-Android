@@ -2,16 +2,19 @@ package app.vit.vitauth.login;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 
 import app.vit.vitauth.exam.ExamActivity;
 import data.Class;
-import data.Credentials;
 import data.ExamInfo;
+import data.GetExamInfo;
 
-public class LoginTask extends AsyncTask<Credentials, Void, ExamInfo> {
+public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
 
     private LoginFragment loginFragment;
     private ExamInfo examInfo;
@@ -21,12 +24,15 @@ public class LoginTask extends AsyncTask<Credentials, Void, ExamInfo> {
     }
 
     @Override
-    protected ExamInfo doInBackground(Credentials... credentials) {
+    protected ExamInfo doInBackground(GetExamInfo... params) {
 
-        if (credentials.length == 0) {
+        if (params.length == 0) {
             return null;
         }
-
+        GetExamInfo ob = params[0];
+        Gson gson = new Gson();
+        String json = gson.toJson(ob);
+        Log.i("JSON STRING", json);
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
 

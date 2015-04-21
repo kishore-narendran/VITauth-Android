@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import app.vit.vitauth.R;
-import data.Credentials;
+import data.GetExamInfo;
 
 public class LoginFragment extends Fragment {
 
@@ -23,17 +24,28 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        rootView = inflater.inflate(R.layout.fragment_main, container, false);
         Button button = (Button) rootView.findViewById(R.id.login_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText employeeIdEditText = (EditText) rootView.findViewById(R.id.employee_id);
-                EditText passwordEditText = (EditText) rootView.findViewById(R.id.password);
 
-                Credentials credentials = new Credentials(employeeIdEditText.getText().toString(), passwordEditText.getText().toString());
-                login(credentials);
+                EditText employeeIdEditText = (EditText) rootView.findViewById(R.id.employeeID);
+                Spinner buildingSpinner = (Spinner) rootView.findViewById(R.id.building);
+                EditText roomNumber = (EditText) rootView.findViewById(R.id.roomNumber);
+                Spinner examinationTypeSpinner = (Spinner) rootView.findViewById(R.id.examination);
+                Spinner slotSpinner = (Spinner) rootView.findViewById(R.id.examinationSlot);
+                Spinner timeSpinner = (Spinner) rootView.findViewById(R.id.examinationTime);
+                Spinner semesterSpinner = (Spinner) rootView.findViewById(R.id.semester);
+                GetExamInfo obj = new GetExamInfo(Integer.parseInt(employeeIdEditText.getText().toString()),
+                                                                   timeSpinner.getSelectedItem().toString(),
+                                                                   buildingSpinner.getSelectedItem().toString() +" "+ roomNumber.getText().toString(),
+                                                                   slotSpinner.getSelectedItem().toString(),
+                                                                   examinationTypeSpinner.getSelectedItem().toString(),
+                                                                   semesterSpinner.getSelectedItem().toString());
+                login(obj);
             }
+
         });
         return rootView;
     }
@@ -49,7 +61,7 @@ public class LoginFragment extends Fragment {
         progress.dismiss();
     }
 
-    private void login(Credentials credentials) {
-        new LoginTask(this).execute(credentials);
+    private void login(GetExamInfo obj) {
+        new LoginTask(this).execute(obj);
     }
 }
