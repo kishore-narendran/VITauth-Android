@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="building">
+        <item>CDMM</item>
+        <item>GDN</item>
+        <item>MB</item>
+        <item>CBMR</item>
+        <item>SMV</item>
+        <item>TT</item>
+        <item>SJT</item>
+    </string-array>
+
+    <string-array name="examinationType">
+        <item>CAT 1</item>
+        <item>CAT 2</item>
+        <item>TERM END EXAMINATION</item>
+    </string-array>
+
+    <string-array name="examinationSlot">
+        <item>A1</item>
+        <item>A2</item>
+        <item>B1</item>
+        <item>B2</item>
+        <item>C1</item>
+        <item>C2</item>
+        <item>D1</item>
+        <item>D2</item>
+        <item>E1</item>
+        <item>E2</item>
+        <item>F1</item>
+        <item>F2</item>
+        <item>G1</item>
+        <item>G2</item>
+    </string-array>
+
+    <string-array name="examinationTime">
+        <item>FORENOON</item>
+        <item>EVENING</item>
+    </string-array>
+
+    <string-array name="semesterType">
+        <item>FALL SEMESTER</item>
+        <item>WINTER SEMESTER</item>
+    </string-array>
+
+</resources>

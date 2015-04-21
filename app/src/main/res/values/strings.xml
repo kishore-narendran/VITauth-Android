@@ -2,55 +2,20 @@
 <resources>
 
     <string name="app_name">VITauth</string>
-    <string name="hello_world">Hello world!</string>
+
     <string name="action_settings">Settings</string>
-    <string name="Employee_ID">Employee ID:</string>
-    <string name="Room_Number">Room Number</string>
-    <string name="Login">Log In</string>
-    <string-array name="building">
-        <item>CDMM</item>
-        <item>GDN</item>
-        <item>MB</item>
-        <item>CBMR</item>
-        <item>SMV</item>
-        <item>TT</item>
-        <item>SJT</item>
-    </string-array>
 
-    <string-array name="examinationType">
-        <item>CAT 1</item>
-        <item>CAT 2</item>
-        <item>TERM END EXAMINATION</item>
-    </string-array>
+    <string name="label_employee_id">Employee ID: </string>
+    <string name="label_password">Password: </string>
 
-    <string-array name="examinationSlot">
-        <item>A1</item>
-        <item>A2</item>
-        <item>B1</item>
-        <item>B2</item>
-        <item>C1</item>
-        <item>C2</item>
-        <item>D1</item>
-        <item>D2</item>
-        <item>E1</item>
-        <item>E2</item>
-        <item>F1</item>
-        <item>F2</item>
-        <item>G1</item>
-        <item>G2</item>
-    </string-array>
-
-    <string-array name="examinationTime">
-        <item>FORENOON</item>
-        <item>EVENING</item>
-    </string-array>
-
-    <string-array name="semesterType">
-        <item>FALL SEMESTER</item>
-        <item>WINTER SEMESTER</item>
-    </string-array>
+    <string name="login_progress_title">Loading</string>
+    <string name="login_progress_message">Logging in and loading data, please wait&#8230;</string>
 
 
+    <string name="label_room_number">Room Number</string>
+    <string name="label_login">Login</string>
+
+    <string name="hello_world">Hello world!</string>
 
     <string name="title_activity_exam">Exams</string>
 

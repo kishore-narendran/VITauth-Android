@@ -2,6 +2,7 @@ package data;
 
 public class ClassStudent {
 
+    private String name;
     private String registerNumber;
     private boolean debarred;
     private String seat;
@@ -10,7 +11,8 @@ public class ClassStudent {
     private boolean malpractice;
     private String remarks;
 
-    public ClassStudent(String registerNumber, Boolean debarred, String seat) {
+    public ClassStudent(String name, String registerNumber, Boolean debarred, String seat) {
+        this.name = name;
         this.registerNumber = registerNumber;
         this.debarred = debarred;
         this.seat = seat;
@@ -18,6 +20,10 @@ public class ClassStudent {
         attendance = false;
         malpractice = false;
         remarks = "";
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getRegisterNumber() {
