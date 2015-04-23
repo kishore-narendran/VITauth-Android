@@ -6,25 +6,28 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
 import app.vit.vitauth.exam.ExamActivity;
-import data.Class;
-import data.ExamInfo;
 import data.GetExamInfo;
 
-public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
+public class LoginTask extends AsyncTask<GetExamInfo, Void, String> {
 
     private LoginFragment loginFragment;
-    private ExamInfo examInfo;
+    private String examInfo;
 
     public LoginTask(LoginFragment loginFragment) {
         this.loginFragment = loginFragment;
     }
 
     @Override
-    protected ExamInfo doInBackground(GetExamInfo... params) {
+    protected String doInBackground(GetExamInfo... params) {
 
         if (params.length == 0) {
             return null;
@@ -35,17 +38,43 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
         Log.i("JSON STRING", json);
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
-
         try {
-            final String VITAUTH_BASE_URL = "http://vitauth.herokuapp.com/api/client/login";
-            final String EMPID_PARAM = "empid";
-            final String PASSWORD_PARAM = "password";
+            final String VITAUTH_BASE_URL = "http://vitauth.herokuapp.com/api/client/GetExamInfo";
+            byte[] postData = json.getBytes();
+            int postDataLength = postData.length;
+            URL url = new URL(VITAUTH_BASE_URL);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDoOutput(true);
+            urlConnection.setDoInput(true);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+            urlConnection.setUseCaches(false);
+            try {
+                DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+                wr.write(postData);
+                wr.flush();
+                wr.close();
+            }
+            catch(Exception e)
+            {
+                Log.i("Error", e.getMessage());
+            }
 
-            // TODO get and parse JSON
+            InputStream responseStream = new BufferedInputStream(urlConnection.getInputStream());
+            BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
+            String line = "";
+            StringBuilder stringBuilder = new StringBuilder();
+            while ((line = responseStreamReader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+            responseStreamReader.close();
 
-            examInfo = new ExamInfo("WS", "CATI", "A1", "SJT301", "4:00PM", new Class[5]);
+            examInfo = stringBuilder.toString();
+            return examInfo;
         }
-        catch (Exception e) {
+       catch (Exception e) {
+            Log.e("Error", e.getMessage());
 
         }
         finally {
@@ -54,10 +83,11 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
     }
 
     @Override
-    protected void onPostExecute(ExamInfo examInfo) {
+    protected void onPostExecute(String examInfo) {
         loginFragment.dismissProgress();
-        Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class);
+        Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class).putExtra("exam_info", examInfo);
         loginFragment.startActivity(intent);
+
     }
 
     @Override

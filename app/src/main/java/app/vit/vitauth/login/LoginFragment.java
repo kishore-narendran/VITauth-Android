@@ -44,6 +44,7 @@ public class LoginFragment extends Fragment {
                                                                    examinationTypeSpinner.getSelectedItem().toString(),
                                                                    semesterSpinner.getSelectedItem().toString());
                 login(obj);
+
             }
 
         });
@@ -62,6 +63,6 @@ public class LoginFragment extends Fragment {
     }
 
     private void login(GetExamInfo obj) {
-        new LoginTask(this).execute(obj);
+         new LoginTask(this).execute(obj);
     }
 }

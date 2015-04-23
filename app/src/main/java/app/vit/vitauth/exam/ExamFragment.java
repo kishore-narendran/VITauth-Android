@@ -35,8 +35,12 @@ public class ExamFragment extends Fragment {
 
         intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra("exam_info")) {
-            examInfo = (ExamInfo) intent.getExtras().getSerializable("exam_info");
-            classes = examInfo.getClasses();
+
+            classes = new Class[3];
+            classes[0] = new Class(2466, "CSE211", "Operating Systems", new ClassStudent[2]);
+            classes[1] = new Class(3663, "CSE305", "Computer Networks", new ClassStudent[2]);
+            classes[2] = new Class(4687, "CSE319", "Database Systems", new ClassStudent[2]);
+
         } else {
             classes = new Class[3];
             classes[0] = new Class(2466, "CSE211", "Operating Systems", new ClassStudent[2]);
