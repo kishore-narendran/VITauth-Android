@@ -15,20 +15,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import app.vit.vitauth.exam.ExamActivity;
-import data.ExamInfo;
 import data.GetExamInfo;
 
-public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
+public class LoginTask extends AsyncTask<GetExamInfo, Void, String> {
 
     private LoginFragment loginFragment;
-    private ExamInfo examInfo;
+    private String examInfo;
 
     public LoginTask(LoginFragment loginFragment) {
         this.loginFragment = loginFragment;
     }
 
     @Override
-    protected ExamInfo doInBackground(GetExamInfo... params) {
+    protected String doInBackground(GetExamInfo... params) {
 
         if (params.length == 0) {
             return null;
@@ -51,10 +50,15 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
             urlConnection.setUseCaches(false);
-            try (DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream())) {
+            try {
+                DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
                 wr.write(postData);
                 wr.flush();
                 wr.close();
+            }
+            catch(Exception e)
+            {
+                Log.i("Error", e.getMessage());
             }
 
             InputStream responseStream = new BufferedInputStream(urlConnection.getInputStream());
@@ -66,11 +70,8 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
             }
             responseStreamReader.close();
 
-            String response = stringBuilder.toString();
-            Log.i("Response", response);
-            gson = new Gson();
-            ExamInfo examInfo1 = gson.fromJson(response, ExamInfo.class);
-            return examInfo1;
+            examInfo = stringBuilder.toString();
+            return examInfo;
         }
        catch (Exception e) {
             Log.e("Error", e.getMessage());
@@ -82,10 +83,11 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, ExamInfo> {
     }
 
     @Override
-    protected void onPostExecute(ExamInfo examInfo) {
+    protected void onPostExecute(String examInfo) {
         loginFragment.dismissProgress();
-        Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class);
+        Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class).putExtra("exam_info", examInfo);
         loginFragment.startActivity(intent);
+
     }
 
     @Override
