@@ -15,9 +15,9 @@ import java.util.List;
 
 import app.vit.vitauth.R;
 import app.vit.vitauth.student.StudentsActivity;
-import data.Class;
-import data.ClassStudent;
-import data.ExamInfo;
+import app.vit.data.Class;
+import app.vit.data.ClassStudent;
+import app.vit.data.ExamInfo;
 
 public class ExamFragment extends Fragment {
 

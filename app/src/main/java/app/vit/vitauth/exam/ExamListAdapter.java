@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import app.vit.vitauth.R;
-import data.Class;
+import app.vit.data.Class;
 
 public class ExamListAdapter extends ArrayAdapter<Class> {
 

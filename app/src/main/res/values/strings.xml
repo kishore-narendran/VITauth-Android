@@ -19,4 +19,27 @@
 
     <string name="title_activity_exam">Exams</string>
 
+    <!-- MainApplication -->
+    <string name="connection_success">Successfully connected to device</string>
+    <string name="connection_fail">Bluetooth connection with device has failed</string>
+    <string name="connection_lost">Bluetooth connection with device lost</string>
+
+    <!-- BluetoothActivity -->
+    <string name="title_bluetooth">Bluetooth Connectivity</string>
+    <string name="connect_bluetooth">Connect via Bluetooth</string>
+    <string name="select_bluetooth_device">Please connect to a Corewise CR30 device</string>
+
+    <!-- DeviceListActivity -->
+    <string name="enable_bluetooth">Bluetooth Enabled</string>
+    <string name="disable_bluetooth">Bluetooth Connection Cancelled</string>
+    <string name="no_bluetooth">Device does not support Bluetooth</string>
+    <string name="connecting_bluetooth">Connecting</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Devices</string>
+    <string name="button_scan">Scan for devices</string>
+    <string name="scanning">Scanning for devices</string>
+    <string name="select_device">Select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+
 </resources>

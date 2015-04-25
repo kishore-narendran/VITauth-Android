@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import app.vit.vitauth.R;
-import data.GetExamInfo;
+import app.vit.data.GetExamInfo;
 
 public class LoginFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package data;
+package app.vit.data;
 
 /**
  * Created by aarthy on 21/4/15.

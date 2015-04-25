@@ -1,4 +1,4 @@
-package data;
+package app.vit.data;
 
 public class Credentials {
     private String employeeId;

@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import app.vit.vitauth.exam.ExamActivity;
-import data.GetExamInfo;
+import app.vit.data.GetExamInfo;
 
 public class LoginTask extends AsyncTask<GetExamInfo, Void, String> {
 

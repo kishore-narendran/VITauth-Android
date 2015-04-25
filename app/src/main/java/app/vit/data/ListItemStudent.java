@@ -1,4 +1,4 @@
-package data;
+package app.vit.data;
 
 // TODO replace this class with ClassStudent
 

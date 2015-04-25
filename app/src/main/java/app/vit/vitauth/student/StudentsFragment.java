@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import app.vit.vitauth.R;
-import data.ListItemStudent;
+import app.vit.data.ListItemStudent;
 
 public class StudentsFragment extends Fragment {
 

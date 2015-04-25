@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.vit.vitauth">
 
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +28,16 @@
             android:name=".student.StudentsActivity"
             android:parentActivityName=".exam.ExamActivity" >
         </activity>
+        <activity
+            android:name=".bluetooth.BluetoothActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".bluetooth.DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog">
+        </activity>
 
     </application>
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

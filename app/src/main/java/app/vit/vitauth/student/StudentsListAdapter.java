@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import app.vit.vitauth.R;
-import data.ListItemStudent;
+import app.vit.data.ListItemStudent;
 
 /**
  * Created by kishore on 5/4/15.
