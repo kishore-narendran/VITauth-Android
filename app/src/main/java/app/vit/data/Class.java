@@ -2,20 +2,20 @@ package app.vit.data;
 
 public class Class {
 
-    private int classNumber;
+    private int class_number;
     private String code;
     private String title;
-    private ClassStudent classStudents[];
+    private ClassStudent students[];
 
-    public Class(Integer classNumber, String code, String title, ClassStudent[] classStudents) {
-        this.classNumber = classNumber;
+    public Class(Integer class_number, String code, String title, ClassStudent[] students) {
+        this.class_number = class_number;
         this.code = code;
         this.title = title;
-        this.classStudents = classStudents;
+        this.students = students;
     }
 
-    public Integer getClassNumber() {
-        return classNumber;
+    public Integer getClass_number() {
+        return class_number;
     }
 
     public String getCode() {
@@ -26,7 +26,7 @@ public class Class {
         return title;
     }
 
-    public ClassStudent[] getClassStudents() {
-        return classStudents;
+    public ClassStudent[] getStudents() {
+        return students;
     }
 }

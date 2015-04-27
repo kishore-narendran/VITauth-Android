@@ -3,7 +3,7 @@ package app.vit.data;
 public class ClassStudent {
 
     private String name;
-    private String registerNumber;
+    private String register_number;
     private boolean debarred;
     private String seat;
 
@@ -11,9 +11,9 @@ public class ClassStudent {
     private boolean malpractice;
     private String remarks;
 
-    public ClassStudent(String name, String registerNumber, Boolean debarred, String seat) {
+    public ClassStudent(String name, String register_number, Boolean debarred, String seat) {
         this.name = name;
-        this.registerNumber = registerNumber;
+        this.register_number = register_number;
         this.debarred = debarred;
         this.seat = seat;
 
@@ -26,8 +26,8 @@ public class ClassStudent {
         return name;
     }
 
-    public String getRegisterNumber() {
-        return registerNumber;
+    public String getRegister_number() {
+        return register_number;
     }
 
     public Boolean getDebarred() {

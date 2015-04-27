@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import app.vit.data.ClassStudent;
 import app.vit.vitauth.R;
-import app.vit.data.ListItemStudent;
 
 /**
  * Created by kishore on 5/4/15.
  */
-public class StudentsListAdapter extends ArrayAdapter<ListItemStudent> {
+public class StudentsListAdapter extends ArrayAdapter<ClassStudent> {
 
     private final Context context;
-    private final ArrayList<ListItemStudent> itemsArrayList;
+    private final ArrayList<ClassStudent> itemsArrayList;
 
-    public StudentsListAdapter(Context context, ArrayList<ListItemStudent> itemsArrayList) {
+    public StudentsListAdapter(Context context, ArrayList<ClassStudent> itemsArrayList) {
 
         super(context, R.layout.list_item_students, itemsArrayList);
 
@@ -38,7 +38,7 @@ public class StudentsListAdapter extends ArrayAdapter<ListItemStudent> {
         TextView regnoView = (TextView) rowView.findViewById(R.id.list_item_regno);
         TextView nameView = (TextView) rowView.findViewById(R.id.list_item_name);
 
-        regnoView.setText(itemsArrayList.get(position).getRegno());
+        regnoView.setText(itemsArrayList.get(position).getRegister_number());
         nameView.setText(itemsArrayList.get(position).getName());
 
         return rowView;
