@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">VITauth</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- Menu -->
+    <string name="action_scan">Scan</string>
 
+    <!-- LoginActivity and LoginFragment -->
     <string name="label_employee_id">Employee ID: </string>
     <string name="label_password">Password: </string>
-
-    <string name="login_progress_title">Loading</string>
-    <string name="login_progress_message">Logging in and loading data, please wait&#8230;</string>
-
-
     <string name="label_room_number">Room Number</string>
     <string name="label_login">Login</string>
 
-    <string name="hello_world">Hello world!</string>
+    <!-- LoginTask -->
+    <string name="login_progress_title">Loading</string>
+    <string name="login_progress_message">Logging in and loading data, please wait&#8230;</string>
 
-    <string name="title_activity_exam">Exams</string>
+    <!-- ExamActivity and ExamFragment -->
+    <string name="title_exam">Exams</string>
+
+    <!-- StudentActivity and StudentFragment -->
+    <string name="title_student">Exams</string>
 
     <!-- MainApplication -->
     <string name="connection_success">Successfully connected to device</string>
@@ -41,5 +43,8 @@
     <string name="select_device">Select a device to connect</string>
     <string name="none_paired">No devices have been paired</string>
     <string name="none_found">No devices found</string>
+
+    <!-- DeviceActivity and DeviceFragment -->
+    <string name="title_device">Scanner</string>
 
 </resources>
