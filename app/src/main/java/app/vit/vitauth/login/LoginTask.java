@@ -69,7 +69,6 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
         boolean loginResult;
 
         try {
-
             Uri builtUri = Uri.parse(VITAUTH_BASE_URL).buildUpon()
                     .appendPath(VITAUTH_API_SUBURL)
                     .appendPath(VITAUTH_CLIENT_SUBURL)
