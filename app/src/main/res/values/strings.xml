@@ -46,5 +46,12 @@
 
     <!-- DeviceActivity and DeviceFragment -->
     <string name="title_device">Scanner</string>
+    <string name="fingerprint_verify_success">Fingerprint verified</string>
+    <string name="fingerprint_verify_fail">Fingerprint verification failed</string>
+    <string name="fingerprint_processing">Processing fingerprint, please wait&#8230;</string>
+    <string name="fingerprint_processing_fail">Processing fingerprint failed</string>
+    <string name="rfid_reading">Scanning ID card</string>
+    <string name="rfid_read_success">ID card scanned, Register No. found</string>
+    <string name="rfid_read_fail">Scanning ID card failed</string>
 
 </resources>
