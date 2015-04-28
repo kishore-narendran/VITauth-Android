@@ -4,109 +4,150 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.io.OutputStream;
 import java.net.URL;
 
+import javax.net.ssl.HttpsURLConnection;
+
+import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.ExamInfo;
 import app.vit.data.GetExamInfo;
 import app.vit.data.Result;
+import app.vit.vitauth.MainApplication;
+import app.vit.vitauth.R;
+import app.vit.vitauth.bluetooth.BluetoothActivity;
 import app.vit.vitauth.exam.ExamActivity;
 
-public class LoginTask extends AsyncTask<GetExamInfo, Void, String> {
+public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
 
+    private final String LOG_TAG = LoginTask.class.getSimpleName();
+
+    private MainApplication application;
     private LoginFragment loginFragment;
-    private String examInfoResponse;
-    private ExamInfo examInfo;
-    private Result result;
 
     public LoginTask(LoginFragment loginFragment) {
         this.loginFragment = loginFragment;
+        this.application = (MainApplication) this.loginFragment.getActivity().getApplicationContext();
     }
 
     @Override
-    protected String doInBackground(GetExamInfo... params) {
+    protected Boolean doInBackground(GetExamInfo... params) {
 
         if (params.length == 0) {
             return null;
         }
-        GetExamInfo ob = params[0];
+
         Gson gson = new Gson();
+
+        final String VITAUTH_BASE_URL = "https://vitauth.herokuapp.com";
+        final String VITAUTH_API_SUBURL = "api";
+        final String VITAUTH_CLIENT_SUBURL = "client";
+        final String VITAUTH_GETEXAMINFO_SUBURL = "getexaminfo";
+
+        final String USER_AGENT = "Mozilla/5.0";
+
+        GetExamInfo ob = params[0];
         String json = gson.toJson(ob);
-        Log.i("JSON STRING", json);
-        HttpURLConnection urlConnection = null;
-        BufferedReader reader = null;
+        byte[] postData = json.getBytes();
+        int postDataLength = postData.length;
+
+        HttpsURLConnection urlConnection = null;
+        BufferedReader responseStreamReader = null;
+
+        boolean loginResult;
+
         try {
-            final String VITAUTH_BASE_URL = "http://vitauth.herokuapp.com/api/client/GetExamInfo";
-            byte[] postData = json.getBytes();
-            int postDataLength = postData.length;
-            URL url = new URL(VITAUTH_BASE_URL);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setDoOutput(true);
-            urlConnection.setDoInput(true);
+
+            Uri builtUri = Uri.parse(VITAUTH_BASE_URL).buildUpon()
+                    .appendPath(VITAUTH_API_SUBURL)
+                    .appendPath(VITAUTH_CLIENT_SUBURL)
+                    .appendPath(VITAUTH_GETEXAMINFO_SUBURL)
+                    .build();
+            Log.v(LOG_TAG, "VITauth Uri: " + builtUri.toString());
+
+            URL url = new URL(builtUri.toString());
+            urlConnection = (HttpsURLConnection) url.openConnection();
+            urlConnection.setReadTimeout(25000);
+            urlConnection.setConnectTimeout(30000);
             urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("User-Agent", USER_AGENT);
+            urlConnection.setDoInput(true);
+            urlConnection.setDoOutput(true);
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Content-Length", Integer.toString(postDataLength));
             urlConnection.setUseCaches(false);
-            try {
-                DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
-                wr.write(postData);
-                wr.flush();
-                wr.close();
-            }
-            catch(Exception e)
-            {
-                Log.i("Error", e.getMessage());
-            }
+
+            OutputStream os = urlConnection.getOutputStream();
+            DataOutputStream writer = new DataOutputStream(os);
+            writer.write(postData);
+            writer.flush();
+            writer.close();
+            os.close();
+
+            urlConnection.connect();
 
             InputStream responseStream = new BufferedInputStream(urlConnection.getInputStream());
-            BufferedReader responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
-            String line = "";
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((line = responseStreamReader.readLine()) != null) {
-                stringBuilder.append(line);
+            responseStreamReader = new BufferedReader(new InputStreamReader(responseStream));
+
+            ExamInfo examInfo = gson.fromJson(responseStreamReader, ExamInfo.class);
+            Result result = examInfo.getResult();
+
+            if (result.getCode() == 1) {
+                SharedPreferences sharedPreferences = loginFragment.getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
+                Editor editor = sharedPreferences.edit();
+                editor.putString("exam_info", gson.toJson(examInfo));
+                editor.apply();
+                loginResult = true;
+            } else {
+                loginResult = false;
             }
-            responseStreamReader.close();
 
-            examInfoResponse = stringBuilder.toString();
-            return examInfoResponse;
-        }
-       catch (Exception e) {
-            Log.e("Error", e.getMessage());
 
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Error occured when attempting to upload data", e);
+            loginResult = false;
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (responseStreamReader != null) {
+                try {
+                    responseStreamReader.close();
+                } catch (IOException e) {
+                    Log.e(LOG_TAG, "Error closing stream", e);
+                }
+            }
         }
-        finally {
-            return examInfoResponse;
-        }
+        return loginResult;
     }
 
     @Override
-    protected void onPostExecute(String examInfoResponse) {
-        Gson gson = new Gson();
-        examInfo = gson.fromJson(examInfoResponse, ExamInfo.class);
-        result = examInfo.getResult();
-        if(result.getCode() == 0) {
+    protected void onPostExecute(Boolean loginResult) {
+        if (loginResult) {
             loginFragment.dismissProgress();
-            Toast.makeText(loginFragment.getActivity(), "Invalid Credentials!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            SharedPreferences sharedPreferences = loginFragment.getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
-            Editor editor = sharedPreferences.edit();
-            editor.putString("exam_info", examInfoResponse);
-            editor.commit();
-            loginFragment.dismissProgress();
-            Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class).putExtra("exam_info", examInfoResponse);
+
+            Intent intent;
+            if (!application.isConnect()) {
+                intent = new Intent(loginFragment.getActivity(), BluetoothActivity.class);
+            } else {
+                intent = new Intent(loginFragment.getActivity(), ExamActivity.class);
+            }
             loginFragment.startActivity(intent);
+        } else {
+            loginFragment.dismissProgress();
+            ToastUtil.showToast(loginFragment.getActivity(), R.string.login_invalid);
         }
     }
 
