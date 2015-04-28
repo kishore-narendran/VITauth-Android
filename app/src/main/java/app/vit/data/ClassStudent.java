@@ -1,34 +1,52 @@
 package app.vit.data;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ClassStudent {
 
+    @Expose
     @SerializedName("name")
     private String name;
+
+    @Expose
     @SerializedName("register_number")
     private String registerNumber;
+
+    @Expose
+    @SerializedName("fingerprint")
+    private String fingerprint;
+
+    @Expose
     @SerializedName("debarred")
     private boolean debarred;
+
+    @Expose
     @SerializedName("seat")
     private String seat;
 
+
     @SerializedName("attendance")
     private boolean attendance;
+
+    @Expose
     @SerializedName("malpractice")
     private boolean malpractice;
+
+    @Expose
     @SerializedName("remarks")
     private String remarks;
 
-    public ClassStudent(String name, String registerNumber, Boolean debarred, String seat) {
+    public ClassStudent(String name, String registerNumber, String fingerprint, boolean debarred, String seat) {
         this.name = name;
         this.registerNumber = registerNumber;
+        this.fingerprint = fingerprint;
         this.debarred = debarred;
         this.seat = seat;
 
-        attendance = false;
-        malpractice = false;
-        remarks = "";
+        this.attendance = false;
+        this.malpractice = false;
+        this.remarks = "";
     }
 
     public String getName() {
@@ -39,7 +57,11 @@ public class ClassStudent {
         return registerNumber;
     }
 
-    public Boolean getDebarred() {
+    public String getFingerprint() {
+        return fingerprint;
+    }
+
+    public boolean isDebarred() {
         return debarred;
     }
 
@@ -47,20 +69,12 @@ public class ClassStudent {
         return seat;
     }
 
-    public Boolean getAttendance() {
+    public boolean isAttendance() {
         return attendance;
     }
 
-    public void setAttendance(Boolean attendance) {
-        this.attendance = attendance;
-    }
-
-    public Boolean getMalpractice() {
+    public boolean isMalpractice() {
         return malpractice;
-    }
-
-    public void setMalpractice(Boolean malpractice) {
-        this.malpractice = malpractice;
     }
 
     public String getRemarks() {
@@ -69,5 +83,13 @@ public class ClassStudent {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public void setMalpractice(boolean malpractice) {
+        this.malpractice = malpractice;
+    }
+
+    public void setAttendance(boolean attendance) {
+        this.attendance = attendance;
     }
 }
