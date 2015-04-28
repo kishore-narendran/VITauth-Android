@@ -9,11 +9,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:labelFor="@+id/employee_id"
+        android:labelFor="@+id/employeeID"
         android:text="@string/label_employee_id" />
 
     <EditText
-        android:id="@+id/employee_id"
+        android:id="@+id/employeeID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:imeOptions="actionSend"

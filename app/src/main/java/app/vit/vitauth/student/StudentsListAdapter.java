@@ -38,7 +38,7 @@ public class StudentsListAdapter extends ArrayAdapter<ClassStudent> {
         TextView regnoView = (TextView) rowView.findViewById(R.id.list_item_regno);
         TextView nameView = (TextView) rowView.findViewById(R.id.list_item_name);
 
-        regnoView.setText(itemsArrayList.get(position).getRegister_number());
+        regnoView.setText(itemsArrayList.get(position).getRegisterNumber());
         nameView.setText(itemsArrayList.get(position).getName());
 
         return rowView;

@@ -37,7 +37,7 @@ public class ExamListAdapter extends ArrayAdapter<Class> {
         TextView classNumberView = (TextView) convertView.findViewById(R.id.list_item_classNumber);
         TextView codeTitle = (TextView) convertView.findViewById(R.id.list_item_codeTitle);
 
-        classNumberView.setText(classes.get(position).getClass_number().toString());
+        classNumberView.setText(classes.get(position).getClassNumber().toString());
         codeTitle.setText(classes.get(position).getTitle());
 
         return convertView;

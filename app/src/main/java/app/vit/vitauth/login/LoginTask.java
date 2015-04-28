@@ -1,8 +1,12 @@
 package app.vit.vitauth.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -14,13 +18,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import app.vit.vitauth.exam.ExamActivity;
+import app.vit.data.ExamInfo;
 import app.vit.data.GetExamInfo;
+import app.vit.data.Result;
+import app.vit.vitauth.exam.ExamActivity;
 
 public class LoginTask extends AsyncTask<GetExamInfo, Void, String> {
 
     private LoginFragment loginFragment;
-    private String examInfo;
+    private String examInfoResponse;
+    private ExamInfo examInfo;
+    private Result result;
 
     public LoginTask(LoginFragment loginFragment) {
         this.loginFragment = loginFragment;
@@ -70,24 +78,36 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, String> {
             }
             responseStreamReader.close();
 
-            examInfo = stringBuilder.toString();
-            return examInfo;
+            examInfoResponse = stringBuilder.toString();
+            return examInfoResponse;
         }
        catch (Exception e) {
             Log.e("Error", e.getMessage());
 
         }
         finally {
-            return examInfo;
+            return examInfoResponse;
         }
     }
 
     @Override
-    protected void onPostExecute(String examInfo) {
-        loginFragment.dismissProgress();
-        Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class).putExtra("exam_info", examInfo);
-        loginFragment.startActivity(intent);
-
+    protected void onPostExecute(String examInfoResponse) {
+        Gson gson = new Gson();
+        examInfo = gson.fromJson(examInfoResponse, ExamInfo.class);
+        result = examInfo.getResult();
+        if(result.getCode() == 0) {
+            loginFragment.dismissProgress();
+            Toast.makeText(loginFragment.getActivity(), "Invalid Credentials!", Toast.LENGTH_LONG).show();
+        }
+        else {
+            SharedPreferences sharedPreferences = loginFragment.getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
+            Editor editor = sharedPreferences.edit();
+            editor.putString("exam_info", examInfoResponse);
+            editor.commit();
+            loginFragment.dismissProgress();
+            Intent intent = new Intent(loginFragment.getActivity(), ExamActivity.class).putExtra("exam_info", examInfoResponse);
+            loginFragment.startActivity(intent);
+        }
     }
 
     @Override

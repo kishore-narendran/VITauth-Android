@@ -1,6 +1,8 @@
 package app.vit.vitauth.exam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import app.vit.data.Class;
-import app.vit.data.ClassStudent;
 import app.vit.data.ExamInfo;
 import app.vit.vitauth.R;
 import app.vit.vitauth.student.StudentsActivity;
@@ -36,19 +37,11 @@ public class ExamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        intent = getActivity().getIntent();
-        if (intent != null && intent.hasExtra("exam_info")) {
-            examInfoStr = intent.getStringExtra("exam_info");
-            Gson gson = new Gson();
-            ExamInfo examInfo = gson.fromJson(examInfoStr, ExamInfo.class);
-            classes = examInfo.getClasses();
-
-        } else {
-            classes = new Class[3];
-            classes[0] = new Class(2466, "CSE211", "Operating Systems", new ClassStudent[2]);
-            classes[1] = new Class(3663, "CSE305", "Computer Networks", new ClassStudent[2]);
-            classes[2] = new Class(4687, "CSE319", "Database Systems", new ClassStudent[2]);
-        }
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
+        examInfoStr = sharedPreferences.getString("exam_info", null);
+        Gson gson = new Gson();
+        examInfo = gson.fromJson(examInfoStr, ExamInfo.class);
+        classes = examInfo.getClasses();
 
         View rootView = inflater.inflate(R.layout.fragment_exam, container, false);
 
