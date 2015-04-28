@@ -1,19 +1,28 @@
 package app.vit.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ClassStudent {
 
+    @SerializedName("name")
     private String name;
-    private String register_number;
+    @SerializedName("register_number")
+    private String registerNumber;
+    @SerializedName("debarred")
     private boolean debarred;
+    @SerializedName("seat")
     private String seat;
 
+    @SerializedName("attendance")
     private boolean attendance;
+    @SerializedName("malpractice")
     private boolean malpractice;
+    @SerializedName("remarks")
     private String remarks;
 
-    public ClassStudent(String name, String register_number, Boolean debarred, String seat) {
+    public ClassStudent(String name, String registerNumber, Boolean debarred, String seat) {
         this.name = name;
-        this.register_number = register_number;
+        this.registerNumber = registerNumber;
         this.debarred = debarred;
         this.seat = seat;
 
@@ -26,8 +35,8 @@ public class ClassStudent {
         return name;
     }
 
-    public String getRegister_number() {
-        return register_number;
+    public String getRegisterNumber() {
+        return registerNumber;
     }
 
     public Boolean getDebarred() {
