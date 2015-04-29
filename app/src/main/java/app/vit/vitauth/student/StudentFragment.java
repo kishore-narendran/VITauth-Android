@@ -23,6 +23,8 @@ import app.vit.data.Student;
 import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
 import app.vit.vitauth.StudentListAdapter;
+import app.vit.vitauth.bluetooth.BluetoothActivity;
+import app.vit.vitauth.device.DeviceActivity;
 
 public class StudentFragment extends Fragment {
 
@@ -37,14 +39,15 @@ public class StudentFragment extends Fragment {
     private View rootView;
 
     private int classNumber;
-    private int listPosition;
+    private int examListPosition;
 
     private ExamInfo examInfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_students, container, false);
+        rootView = inflater.inflate(R.layout.fragment_student, container, false);
+        setHasOptionsMenu(true);
 
         initData();
         initView();
@@ -64,8 +67,8 @@ public class StudentFragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_refresh:
-                refreshWeather();
+            case R.id.action_scan:
+                openScanner();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -73,6 +76,8 @@ public class StudentFragment extends Fragment {
 
     private void initData() {
         Gson gson = new Gson();
+
+        application = (MainApplication) getActivity().getApplicationContext();
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
         String examInfoStr = sharedPreferences.getString("exam_info", null);
@@ -82,12 +87,12 @@ public class StudentFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         if (intent != null && intent.hasExtra(intentExtraClassNumber) && intent.hasExtra(intentExtraListPosition)) {
             classNumber = intent.getIntExtra(intentExtraClassNumber, defaultClassNumber);
-            listPosition = intent.getIntExtra(intentExtraListPosition, defaultListPosition);
+            examListPosition = intent.getIntExtra(intentExtraListPosition, defaultListPosition);
         }
     }
 
     private void initView() {
-        Student[] students = examInfo.getClasses()[listPosition].getStudents();
+        Student[] students = examInfo.getClasses()[examListPosition].getStudents();
 
         ArrayList<Student> studentsArrayList = new ArrayList<>(Arrays.asList(students));
         StudentListAdapter studentListAdapter = new StudentListAdapter(getActivity(), studentsArrayList);
@@ -95,4 +100,17 @@ public class StudentFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.listview_students);
         listView.setAdapter(studentListAdapter);
     }
+
+    private void openScanner() {
+        Intent intent;
+        if (!application.isConnect()) {
+            intent = new Intent(getActivity(), BluetoothActivity.class);
+        } else {
+            intent = new Intent(getActivity(), DeviceActivity.class);
+            intent.putExtra(intentExtraClassNumber, classNumber);
+            intent.putExtra(intentExtraListPosition, examListPosition);
+        }
+        startActivity(intent);
+    }
+
 }
