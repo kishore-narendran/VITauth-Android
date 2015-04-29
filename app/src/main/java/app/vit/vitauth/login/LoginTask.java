@@ -107,7 +107,7 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
                 SharedPreferences sharedPreferences = loginFragment.getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
                 Editor editor = sharedPreferences.edit();
                 editor.putString("exam_info", gson.toJson(examInfo));
-                editor.apply();
+                editor.commit();
                 loginResult = true;
             } else {
                 loginResult = false;
