@@ -3,7 +3,7 @@ package app.vit.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ClassStudent {
+public class Student {
 
     @Expose
     @SerializedName("name")
@@ -37,7 +37,7 @@ public class ClassStudent {
     @SerializedName("remarks")
     private String remarks;
 
-    public ClassStudent(String name, String registerNumber, String fingerprint, boolean debarred, String seat) {
+    public Student(String name, String registerNumber, String fingerprint, boolean debarred, String seat) {
         this.name = name;
         this.registerNumber = registerNumber;
         this.fingerprint = fingerprint;

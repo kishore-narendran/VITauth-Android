@@ -19,9 +19,9 @@ public class Class {
 
     @Expose
     @SerializedName("students")
-    private ClassStudent students[];
+    private Student students[];
 
-    public Class(Integer classNumber, String code, String title, ClassStudent[] students) {
+    public Class(Integer classNumber, String code, String title, Student[] students) {
         this.classNumber = classNumber;
         this.code = code;
         this.title = title;
@@ -40,7 +40,7 @@ public class Class {
         return title;
     }
 
-    public ClassStudent[] getStudents() {
+    public Student[] getStudents() {
         return students;
     }
 }
