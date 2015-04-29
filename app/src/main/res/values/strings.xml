@@ -12,7 +12,6 @@
     <string name="label_login">Login</string>
 
     <!-- LoginTask -->
-    <string name="login_progress_title">Loading</string>
     <string name="login_progress_message">Logging in and loading data, please wait&#8230;</string>
     <string name="login_invalid">Invalid credentials</string>
 
