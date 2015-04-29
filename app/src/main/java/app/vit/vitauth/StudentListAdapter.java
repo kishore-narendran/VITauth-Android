@@ -18,7 +18,7 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
 
     public StudentListAdapter(Context context, List<Student> students) {
 
-        super(context, R.layout.list_item_students, students);
+        super(context, R.layout.student_list_item, students);
 
         this.context = context;
         this.students = students;
@@ -30,7 +30,7 @@ public class StudentListAdapter extends ArrayAdapter<Student> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_exams, parent, false);
+            convertView = inflater.inflate(R.layout.student_list_item, parent, false);
         }
 
         TextView regnoView = (TextView) convertView.findViewById(R.id.list_item_regno);
