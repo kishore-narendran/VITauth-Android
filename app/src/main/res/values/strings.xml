@@ -2,8 +2,9 @@
 <resources>
     <string name="app_name">VITauth</string>
 
-    <!-- Menu -->
-    <string name="action_scan">Scan</string>
+    <!-- Menus -->
+    <string name="action_scan">Scanner</string>
+    <string name="action_upload">Upload</string>
 
     <!-- LoginActivity and LoginFragment -->
     <string name="label_employee_id">Employee ID: </string>
@@ -46,12 +47,14 @@
 
     <!-- DeviceActivity and DeviceFragment -->
     <string name="title_device">Scanner</string>
+    <string name="press_finger">Press finger</string>
     <string name="fingerprint_verify_success">Fingerprint verified</string>
     <string name="fingerprint_verify_fail">Fingerprint verification failed</string>
     <string name="fingerprint_processing">Processing fingerprint, please wait&#8230;</string>
     <string name="fingerprint_processing_fail">Processing fingerprint failed</string>
     <string name="rfid_reading">Scanning ID card</string>
-    <string name="rfid_read_success">ID card scanned, Register No. found</string>
+    <string name="rfid_student_found">ID card scanned, student verified</string>
+    <string name="rfid_student_notfound">ID card scanned, unknown student</string>
     <string name="rfid_read_fail">Scanning ID card failed</string>
     <string name="label_scan">Scan</string>
 
