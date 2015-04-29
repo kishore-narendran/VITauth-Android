@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import app.vit.data.ClassStudent;
+import app.vit.data.Student;
 
-public class StudentListAdapter extends ArrayAdapter<ClassStudent> {
+public class StudentListAdapter extends ArrayAdapter<Student> {
 
     private final Context context;
-    private final List<ClassStudent> students;
+    private final List<Student> students;
 
-    public StudentListAdapter(Context context, List<ClassStudent> students) {
+    public StudentListAdapter(Context context, List<Student> students) {
 
         super(context, R.layout.list_item_students, students);
 

@@ -19,49 +19,58 @@ import java.util.List;
 
 import app.vit.data.Class;
 import app.vit.data.ExamInfo;
+import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
 import app.vit.vitauth.student.StudentsActivity;
 
 public class ExamFragment extends Fragment {
 
-    private Intent intent;
-    private ExamInfo examInfo;
-    private Class[] classes;
-    private ExamListAdapter examListAdapter;
-    private String examInfoStr;
+    private final String intentExtraClassNumber = "class_number";
+    private final String intentExtraListPosition = "list_position";
 
-    public ExamFragment() {
-    }
+    private MainApplication application;
+
+    private View rootView;
+
+    private ExamInfo examInfo;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        rootView = inflater.inflate(R.layout.fragment_exam, container, false);
+
+        initData();
+        initView();
+
+        return rootView;
+    }
+
+    private void initData() {
+        Gson gson = new Gson();
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
-        examInfoStr = sharedPreferences.getString("exam_info", null);
-        Gson gson = new Gson();
+        String examInfoStr = sharedPreferences.getString("exam_info", null);
+
         examInfo = gson.fromJson(examInfoStr, ExamInfo.class);
-        classes = examInfo.getClasses();
+    }
 
-        View rootView = inflater.inflate(R.layout.fragment_exam, container, false);
-
+    private void initView() {
+        final Class[] classes = examInfo.getClasses();
         List<Class> examList = new ArrayList<>(Arrays.asList(classes));
-        examListAdapter = new ExamListAdapter(getActivity(), examList);
+        ExamListAdapter examListAdapter = new ExamListAdapter(getActivity(), examList);
 
         ListView listView = (ListView) rootView.findViewById(R.id.listview_exam);
         listView.setAdapter(examListAdapter);
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), StudentsActivity.class);
-                intent.putExtra("exam_info", examInfoStr);
-                intent.putExtra("position", String.valueOf(position));
+                intent.putExtra(intentExtraClassNumber, classes[position].getClassNumber());
+                intent.putExtra(intentExtraListPosition, position);
+
                 startActivity(intent);
             }
         });
-
-        return rootView;
     }
 }

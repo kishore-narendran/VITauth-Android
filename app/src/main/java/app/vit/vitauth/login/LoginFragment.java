@@ -16,17 +16,22 @@ import app.vit.data.GetExamInfo;
 public class LoginFragment extends Fragment {
 
     private View rootView;
-    private ProgressDialog progress;
-
-    public LoginFragment() {
-    }
+    private ProgressDialog progressDialog;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        initView();
+
+        return rootView;
+    }
+
+    private void initView() {
         Button button = (Button) rootView.findViewById(R.id.login_button);
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
@@ -38,28 +43,30 @@ public class LoginFragment extends Fragment {
                 Spinner timeSpinner = (Spinner) rootView.findViewById(R.id.examinationTime);
                 Spinner semesterSpinner = (Spinner) rootView.findViewById(R.id.semester);
                 GetExamInfo obj = new GetExamInfo(Integer.parseInt(employeeIdEditText.getText().toString()),
-                                                                   timeSpinner.getSelectedItem().toString(),
-                                                                   buildingSpinner.getSelectedItem().toString() +" "+ roomNumber.getText().toString(),
-                                                                   slotSpinner.getSelectedItem().toString(),
-                                                                   examinationTypeSpinner.getSelectedItem().toString(),
-                                                                   semesterSpinner.getSelectedItem().toString());
+                        timeSpinner.getSelectedItem().toString(),
+                        buildingSpinner.getSelectedItem().toString() +" "+ roomNumber.getText().toString(),
+                        slotSpinner.getSelectedItem().toString(),
+                        examinationTypeSpinner.getSelectedItem().toString(),
+                        semesterSpinner.getSelectedItem().toString());
                 login(obj);
-
             }
-
         });
-        return rootView;
     }
 
-    public void showProgress() {
-        progress = new ProgressDialog(getActivity());
-        progress.setTitle(getString(R.string.login_progress_title));
-        progress.setMessage(getString(R.string.login_progress_message));
-        progress.show();
+    void showProgressDialog(int resId) {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(getActivity());
+        }
+        progressDialog.setMessage(getResources().getString(resId));
+        if (!progressDialog.isShowing()) {
+            progressDialog.show();
+        }
     }
 
-    public void dismissProgress() {
-        progress.dismiss();
+    void cancelProgressDialog() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
+        }
     }
 
     private void login(GetExamInfo obj) {

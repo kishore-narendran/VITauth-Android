@@ -74,7 +74,7 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
                     .appendPath(VITAUTH_CLIENT_SUBURL)
                     .appendPath(VITAUTH_GETEXAMINFO_SUBURL)
                     .build();
-            Log.v(LOG_TAG, "VITauth Uri: " + builtUri.toString());
+            Log.d(LOG_TAG, "VITauth Uri: " + builtUri.toString());
 
             URL url = new URL(builtUri.toString());
             urlConnection = (HttpsURLConnection) url.openConnection();
@@ -107,7 +107,7 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
                 SharedPreferences sharedPreferences = loginFragment.getActivity().getSharedPreferences("information", Context.MODE_PRIVATE);
                 Editor editor = sharedPreferences.edit();
                 editor.putString("exam_info", gson.toJson(examInfo));
-                editor.commit();
+                editor.apply();
                 loginResult = true;
             } else {
                 loginResult = false;
@@ -135,7 +135,7 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean loginResult) {
         if (loginResult) {
-            loginFragment.dismissProgress();
+            loginFragment.cancelProgressDialog();
 
             Intent intent;
             if (!application.isConnect()) {
@@ -145,13 +145,13 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
             }
             loginFragment.startActivity(intent);
         } else {
-            loginFragment.dismissProgress();
+            loginFragment.cancelProgressDialog();
             ToastUtil.showToast(loginFragment.getActivity(), R.string.login_invalid);
         }
     }
 
     @Override
     protected void onPreExecute() {
-        loginFragment.showProgress();
+        loginFragment.showProgressDialog(R.string.login_progress_message);
     }
 }
