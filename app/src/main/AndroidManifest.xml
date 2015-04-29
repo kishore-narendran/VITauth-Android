@@ -28,7 +28,7 @@
             android:label="@string/title_exam" />
 
         <activity
-            android:name=".student.StudentsActivity"
+            android:name=".student.StudentActivity"
             android:label="@string/title_student"
             android:parentActivityName=".exam.ExamActivity">
             <meta-data
