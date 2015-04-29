@@ -23,7 +23,8 @@ import java.util.Set;
 import app.vit.vitauth.R;
 
 public class DeviceListActivity extends Activity {
-    private static final String TAG = "DeviceListActivity";
+
+    private static final String LOG_TAG = DeviceListActivity.class.getSimpleName();;
     private static final boolean D = true;
 
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
@@ -49,8 +50,7 @@ public class DeviceListActivity extends Activity {
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
-                    mNewDevicesArrayAdapter.add(device.getName() + "\n"
-                            + device.getAddress());
+                    mNewDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
                 }
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 setProgressBarIndeterminateVisibility(false);
@@ -109,8 +109,7 @@ public class DeviceListActivity extends Activity {
         if (pairedDevices.size() > 0) {
             findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);
             for (BluetoothDevice device : pairedDevices) {
-                mPairedDevicesArrayAdapter.add(device.getName() + "\n"
-                        + device.getAddress());
+                mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
             }
         } else {
             String noDevices = getResources().getText(R.string.none_paired).toString();
@@ -130,7 +129,7 @@ public class DeviceListActivity extends Activity {
     }
 
     private void doDiscovery() {
-        if (D) Log.d(TAG, "doDiscovery()");
+        if (D) Log.d(LOG_TAG, "doDiscovery()");
 
         setProgressBarIndeterminateVisibility(true);
         setTitle(R.string.scanning);
