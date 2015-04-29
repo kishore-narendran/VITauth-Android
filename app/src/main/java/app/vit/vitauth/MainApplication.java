@@ -1,12 +1,11 @@
 package app.vit.vitauth;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
-
-import com.orm.SugarApp;
 
 import app.vit.corewise.logic.BluetoothChatService;
 import app.vit.corewise.logic.BluetoothChatService.OnConnectListener;
@@ -14,14 +13,12 @@ import app.vit.corewise.utils.ToastUtil;
 import app.vit.vitauth.bluetooth.BluetoothActivity;
 
 
-public class MainApplication extends SugarApp implements OnConnectListener {
-
-    private final String LOG_TAG = MainApplication.class.getSimpleName();
+public class MainApplication extends Application implements OnConnectListener {
 
     private static final int CONNECT_SUCCESS = 1;
     private static final int CONNECT_FAIL = 2;
     private static final int CONNECT_LOST = 3;
-
+    private final String LOG_TAG = MainApplication.class.getSimpleName();
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
