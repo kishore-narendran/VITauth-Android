@@ -19,7 +19,7 @@ import app.vit.corewise.asynctask.AsyncM1Card.OnReadAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
 import app.vit.corewise.utils.DataUtils;
 import app.vit.corewise.utils.ToastUtil;
-import app.vit.data.ClassStudent;
+import app.vit.data.Student;
 import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
 
@@ -32,7 +32,7 @@ public class DeviceFragment extends Fragment {
 
     private MainApplication application;
 
-    private ClassStudent classStudent;
+    private Student student;
 
     private View rootView;
     private ProgressDialog progressDialog;
@@ -58,7 +58,7 @@ public class DeviceFragment extends Fragment {
 
     private void initData() {
         application = (MainApplication) getActivity().getApplicationContext();
-        classStudent = null;
+        student = null;
     }
 
     private void initDevice() {
@@ -103,7 +103,7 @@ public class DeviceFragment extends Fragment {
         scanFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = DataUtils.hexStringTobyte(classStudent.getFingerprint());
+                byte[] model = DataUtils.hexStringTobyte(student.getFingerprint());
                 scanFingerprint.PS_DownChar(model);
             }
 
