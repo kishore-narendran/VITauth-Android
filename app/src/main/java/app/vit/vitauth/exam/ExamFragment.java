@@ -21,7 +21,7 @@ import app.vit.data.Class;
 import app.vit.data.ExamInfo;
 import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
-import app.vit.vitauth.student.StudentsActivity;
+import app.vit.vitauth.student.StudentActivity;
 
 public class ExamFragment extends Fragment {
 
@@ -65,7 +65,7 @@ public class ExamFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), StudentsActivity.class);
+                Intent intent = new Intent(getActivity(), StudentActivity.class);
                 intent.putExtra(intentExtraClassNumber, classes[position].getClassNumber());
                 intent.putExtra(intentExtraListPosition, position);
 

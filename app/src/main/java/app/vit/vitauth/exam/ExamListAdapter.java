@@ -19,7 +19,7 @@ public class ExamListAdapter extends ArrayAdapter<Class> {
 
     public ExamListAdapter(Context context, List<Class> classes) {
 
-        super(context, R.layout.list_item_exams, classes);
+        super(context, R.layout.exam_list_item, classes);
 
         this.context = context;
         this.classes = classes;
@@ -31,7 +31,7 @@ public class ExamListAdapter extends ArrayAdapter<Class> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_exams, parent, false);
+            convertView = inflater.inflate(R.layout.exam_list_item, parent, false);
         }
 
         TextView classNumberView = (TextView) convertView.findViewById(R.id.list_item_classNumber);
