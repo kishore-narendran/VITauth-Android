@@ -54,5 +54,6 @@
     <string name="rfid_reading">Scanning ID card</string>
     <string name="rfid_read_success">ID card scanned, Register No. found</string>
     <string name="rfid_read_fail">Scanning ID card failed</string>
+    <string name="label_scan">Scan</string>
 
 </resources>

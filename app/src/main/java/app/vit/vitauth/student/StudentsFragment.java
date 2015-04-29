@@ -15,24 +15,32 @@ import java.util.Arrays;
 
 import app.vit.data.ClassStudent;
 import app.vit.data.ExamInfo;
+import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
+import app.vit.vitauth.StudentListAdapter;
 
 public class StudentsFragment extends Fragment {
 
-    private Intent intent;
+    private MainApplication application;
+
+    private StudentListAdapter studentListAdapter;
+    private View rootView;
+
     private ClassStudent students[];
     private String examInfoStr;
     private ExamInfo examInfo;
-    public StudentsListAdapter myStudentsListAdapter;
+
     public StudentsFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        rootView = inflater.inflate(R.layout.fragment_students, container, false);
+
         //Generating static data for testing
-        intent = getActivity().getIntent();
-        if(intent != null && intent.hasExtra("exam_info")) {
+        Intent intent = getActivity().getIntent();
+        if (intent != null && intent.hasExtra("exam_info")) {
             int position = Integer.parseInt(intent.getStringExtra("position"));
             examInfoStr = intent.getStringExtra("exam_info");
             Gson gson = new Gson();
@@ -41,11 +49,11 @@ public class StudentsFragment extends Fragment {
         }
 
         ArrayList<ClassStudent> students1 = new ArrayList<>(Arrays.asList(students));
-        myStudentsListAdapter = new StudentsListAdapter(getActivity(), students1);
+        studentListAdapter = new StudentListAdapter(getActivity(), students1);
 
-        View rootView = inflater.inflate(R.layout.fragment_students, container, false);
+
         ListView listView = (ListView) rootView.findViewById(R.id.listview_students);
-        listView.setAdapter(myStudentsListAdapter);
+        listView.setAdapter(studentListAdapter);
 
         return rootView;
     }

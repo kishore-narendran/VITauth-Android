@@ -27,8 +27,8 @@ public class ExamListAdapter extends ArrayAdapter<Class> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_item_exams, parent, false);
