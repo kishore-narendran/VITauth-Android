@@ -1,19 +1,29 @@
 package app.vit.vitauth.student;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
+import app.vit.vitauth.bluetooth.BluetoothActivity;
+import app.vit.vitauth.device.DeviceActivity;
 
+public class StudentActivity extends AppCompatActivity {
 
-public class StudentsActivity extends AppCompatActivity {
+    private MainApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        initData();
+
         setContentView(R.layout.activity_students);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new StudentsFragment())
@@ -24,7 +34,7 @@ public class StudentsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_fragment_student, menu);
         return true;
     }
 
@@ -37,9 +47,24 @@ public class StudentsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_scan) {
+            openScanner();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initData() {
+        this.application = (MainApplication) this.getApplicationContext();
+    }
+
+    private void openScanner() {
+        Intent intent;
+        if (!application.isConnect()) {
+            intent = new Intent(this, BluetoothActivity.class);
+        } else {
+            intent = new Intent(this, DeviceActivity.class);
+        }
+        startActivity(intent);
     }
 }
