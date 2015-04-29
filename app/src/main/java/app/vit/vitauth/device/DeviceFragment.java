@@ -316,7 +316,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void uploadData() {
-
+        // TODO Call Execute
     }
 
 }
