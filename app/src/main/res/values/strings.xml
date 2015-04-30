@@ -58,4 +58,9 @@
     <string name="rfid_read_fail">Scanning ID card failed</string>
     <string name="label_scan">Scan</string>
 
+    <!-- UploadTask -->
+    <string name="upload_progress_message">Uploading data, please wait&#8230;</string>
+    <string name="upload_success">Data uploaded successfully</string>
+    <string name="upload_fail">Data upload failed</string>
+
 </resources>
