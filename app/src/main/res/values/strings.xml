@@ -48,7 +48,8 @@
     <!-- DeviceActivity and DeviceFragment -->
     <string name="title_device">Scanner</string>
     <string name="press_finger">Press finger</string>
-    <string name="fingerprint_verify_success">Fingerprint verified</string>
+    <string name="fingerprint_verify_success_but_debarred">Fingerprint verified, but student is debarred</string>
+    <string name="fingerprint_verify_success_attendance_given">Fingerprint verified, student is present</string>
     <string name="fingerprint_verify_fail">Fingerprint verification failed</string>
     <string name="fingerprint_processing">Processing fingerprint, please wait&#8230;</string>
     <string name="fingerprint_processing_fail">Processing fingerprint failed</string>

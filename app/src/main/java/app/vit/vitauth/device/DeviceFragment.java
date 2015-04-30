@@ -22,13 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import app.vit.corewise.asynctask.AsyncFingerprint;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnGetImageListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
-import app.vit.corewise.asynctask.AsyncM1Card.OnReadAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
-import app.vit.corewise.utils.DataUtils;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.ExamInfo;
 import app.vit.data.Student;
@@ -126,7 +121,7 @@ public class DeviceFragment extends Fragment {
         scanRfid = new AsyncM1Card(application.getHandlerThread().getLooper(), application.getChatService());
         scanFingerprint = new AsyncFingerprint(application.getHandlerThread().getLooper(), application.getChatService());
 
-        scanRfid.setOnReadAtPositionListener(new OnReadAtPositionListener() {
+        scanRfid.setOnReadAtPositionListener(new AsyncM1Card.OnReadAtPositionListener() {
 
             @Override
             public void onReadAtPositionSuccess(String num, byte[] data) {
@@ -167,12 +162,12 @@ public class DeviceFragment extends Fragment {
             }
         });
 
-        scanFingerprint.setOnGetImageListener(new OnGetImageListener() {
+        scanFingerprint.setOnGetImageListener(new AsyncFingerprint.OnGetImageListener() {
             @Override
             public void onGetImageSuccess() {
                 cancelProgressDialog();
                 showProgressDialog(R.string.fingerprint_processing);
-                scanFingerprint.PS_GenChar(2);
+                scanFingerprint.PS_GenChar(1);
             }
 
             @Override
@@ -180,12 +175,10 @@ public class DeviceFragment extends Fragment {
                 scanFingerprint.PS_GetImage();
             }
         });
-        scanFingerprint.setOnGenCharListener(new OnGenCharListener() {
+        scanFingerprint.setOnGenCharListener(new AsyncFingerprint.OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = DataUtils.hexStringTobyte(student.getFingerprint());
-                Log.d(LOG_TAG, "Fingerprint: " + student.getFingerprint());
-                scanFingerprint.PS_DownChar(model);
+                scanFingerprint.PS_LoadChar(2, Integer.parseInt(student.getFingerprint()));
             }
 
             @Override
@@ -197,14 +190,14 @@ public class DeviceFragment extends Fragment {
                 classListPosition = -1;
             }
         });
-        scanFingerprint.setOnDownCharListener(new OnDownCharListener() {
+        scanFingerprint.setOnLoadCharListener(new AsyncFingerprint.OnLoadCharListener() {
             @Override
-            public void onDownCharSuccess() {
+            public void onLoadCharSuccess() {
                 scanFingerprint.PS_Match();
             }
 
             @Override
-            public void onDownCharFail() {
+            public void onLoadCharFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_processing_fail);
 
@@ -216,7 +209,14 @@ public class DeviceFragment extends Fragment {
             @Override
             public void onMatchSuccess() {
                 cancelProgressDialog();
-                ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_success);
+
+
+                student.setAttendance(true);
+                if (student.isDebarred()) {
+                    ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_success_but_debarred);
+                } else {
+                    ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_success_attendance_given);
+                }
 
                 examInfo.getClasses()[examListPosition].getStudents()[classListPosition] = student;
                 updateData();
