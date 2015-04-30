@@ -312,7 +312,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void uploadData() {
-        // TODO Upload Execute
+        new UploadTask(this).execute(examInfo);
     }
 
 }
