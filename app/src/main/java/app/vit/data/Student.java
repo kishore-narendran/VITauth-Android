@@ -25,16 +25,10 @@ public class Student {
     @SerializedName("seat")
     private String seat;
 
-
-    @SerializedName("attendance")
     private boolean attendance;
 
-    @Expose
-    @SerializedName("malpractice")
     private boolean malpractice;
 
-    @Expose
-    @SerializedName("remarks")
     private String remarks;
 
     public Student(String name, String registerNumber, String fingerprint, boolean debarred, String seat) {
@@ -73,8 +67,16 @@ public class Student {
         return attendance;
     }
 
+    public void setAttendance(boolean attendance) {
+        this.attendance = !debarred && attendance;
+    }
+
     public boolean isMalpractice() {
         return malpractice;
+    }
+
+    public void setMalpractice(boolean malpractice) {
+        this.malpractice = malpractice;
     }
 
     public String getRemarks() {
@@ -83,13 +85,5 @@ public class Student {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
-    }
-
-    public void setMalpractice(boolean malpractice) {
-        this.malpractice = malpractice;
-    }
-
-    public void setAttendance(boolean attendance) {
-        this.attendance = attendance;
     }
 }
