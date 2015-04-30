@@ -26,7 +26,7 @@ import app.vit.corewise.asynctask.AsyncFingerprint;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGetImageListener;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnMatchListener;
+import app.vit.corewise.asynctask.AsyncFingerprint.OnRegModelListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
 import app.vit.corewise.asynctask.AsyncM1Card.OnReadAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
@@ -184,7 +184,7 @@ public class DeviceFragment extends Fragment {
         scanFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = Base64.decode(student.getFingerprint(), Base64.DEFAULT);
+                byte[] model = Base64.decode(student.getFingerprint(), Base64.URL_SAFE);
                 scanFingerprint.PS_DownChar(model);
             }
 
@@ -200,7 +200,7 @@ public class DeviceFragment extends Fragment {
         scanFingerprint.setOnDownCharListener(new OnDownCharListener() {
             @Override
             public void onDownCharSuccess() {
-                scanFingerprint.PS_Match();
+                scanFingerprint.PS_RegModel();
             }
 
             @Override
@@ -212,9 +212,9 @@ public class DeviceFragment extends Fragment {
                 classListPosition = -1;
             }
         });
-        scanFingerprint.setOnMatchListener(new OnMatchListener() {
+        scanFingerprint.setOnRegModelListener(new OnRegModelListener() {
             @Override
-            public void onMatchSuccess() {
+            public void onRegModelSuccess() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_success);
 
@@ -226,7 +226,7 @@ public class DeviceFragment extends Fragment {
             }
 
             @Override
-            public void onMatchFail() {
+            public void onRegModelFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_fail);
 
