@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,7 +30,6 @@ import app.vit.corewise.asynctask.AsyncFingerprint.OnMatchListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
 import app.vit.corewise.asynctask.AsyncM1Card.OnReadAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
-import app.vit.corewise.utils.DataUtils;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.ExamInfo;
 import app.vit.data.Student;
@@ -184,8 +184,7 @@ public class DeviceFragment extends Fragment {
         scanFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = DataUtils.hexStringTobyte(student.getFingerprint());
-                Log.d(LOG_TAG, "Fingerprint Model Size: " + model.length);
+                byte[] model = Base64.decode(student.getFingerprint(), Base64.DEFAULT);
                 scanFingerprint.PS_DownChar(model);
             }
 
@@ -316,7 +315,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void uploadData() {
-        // TODO Call Execute
+        // TODO Upload Execute
     }
 
 }
