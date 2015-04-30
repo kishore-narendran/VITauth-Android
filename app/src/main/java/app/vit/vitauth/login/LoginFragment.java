@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import app.vit.data.LoginInfo;
 import app.vit.vitauth.R;
-import app.vit.data.GetExamInfo;
 
 public class LoginFragment extends Fragment {
 
@@ -42,7 +42,7 @@ public class LoginFragment extends Fragment {
                 Spinner slotSpinner = (Spinner) rootView.findViewById(R.id.examinationSlot);
                 Spinner timeSpinner = (Spinner) rootView.findViewById(R.id.examinationTime);
                 Spinner semesterSpinner = (Spinner) rootView.findViewById(R.id.semester);
-                GetExamInfo obj = new GetExamInfo(Integer.parseInt(employeeIdEditText.getText().toString()),
+                LoginInfo obj = new LoginInfo(Integer.parseInt(employeeIdEditText.getText().toString()),
                         timeSpinner.getSelectedItem().toString(),
                         buildingSpinner.getSelectedItem().toString() +" "+ roomNumber.getText().toString(),
                         slotSpinner.getSelectedItem().toString(),
@@ -69,7 +69,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void login(GetExamInfo obj) {
+    private void login(LoginInfo obj) {
          new LoginTask(this).execute(obj);
     }
 }

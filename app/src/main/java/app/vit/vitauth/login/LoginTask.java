@@ -23,14 +23,14 @@ import javax.net.ssl.HttpsURLConnection;
 
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.ExamInfo;
-import app.vit.data.GetExamInfo;
+import app.vit.data.LoginInfo;
 import app.vit.data.Result;
 import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
 import app.vit.vitauth.bluetooth.BluetoothActivity;
 import app.vit.vitauth.exam.ExamActivity;
 
-public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
+public class LoginTask extends AsyncTask<LoginInfo, Void, Boolean> {
 
     private final String LOG_TAG = LoginTask.class.getSimpleName();
 
@@ -43,7 +43,7 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(GetExamInfo... params) {
+    protected Boolean doInBackground(LoginInfo... params) {
 
         if (params.length == 0) {
             return null;
@@ -58,7 +58,7 @@ public class LoginTask extends AsyncTask<GetExamInfo, Void, Boolean> {
 
         final String USER_AGENT = "Mozilla/5.0";
 
-        GetExamInfo ob = params[0];
+        LoginInfo ob = params[0];
         String json = gson.toJson(ob);
         byte[] postData = json.getBytes();
         int postDataLength = postData.length;

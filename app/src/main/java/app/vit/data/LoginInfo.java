@@ -3,7 +3,7 @@ package app.vit.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetExamInfo {
+public class LoginInfo {
 
     @Expose
     @SerializedName("employee_id")
@@ -29,7 +29,7 @@ public class GetExamInfo {
     @SerializedName("semester")
     private String semester;
 
-    public GetExamInfo(int employeeID, String time, String venue, String slot, String exam, String semester) {
+    public LoginInfo(int employeeID, String time, String venue, String slot, String exam, String semester) {
         this.employeeID = employeeID;
         this.time = time;
         this.venue = venue;
