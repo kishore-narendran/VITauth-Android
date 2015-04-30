@@ -7,6 +7,8 @@ import android.util.Log;
 
 public class ConnectBroadcast extends BroadcastReceiver {
 
+    private static final String LOG_TAG = ConnectBroadcast.class.getSimpleName();;
+
     private BluetoothActivity bluetoothActivity;
 
     public ConnectBroadcast(BluetoothActivity bluetoothActivity) {
@@ -16,7 +18,7 @@ public class ConnectBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        Log.i("whw", "action=" + action);
+        Log.d(LOG_TAG, "action=" + action);
         if (BluetoothActivity.CONNECT_RESULT.equals(action)) {
             int result = intent.getIntExtra("result", 0);
             if (result == 1) {

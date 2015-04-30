@@ -1,22 +1,31 @@
 package app.vit.data;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by aarthy on 21/4/15.
- */
 public class GetExamInfo {
 
+    @Expose
     @SerializedName("employee_id")
     private int employeeID;
+
+    @Expose
     @SerializedName("time")
     private String time;
+
+    @Expose
     @SerializedName("venue")
     private String venue;
+
+    @Expose
     @SerializedName("slot")
     private String slot;
+
+    @Expose
     @SerializedName("exam")
     private String exam;
+
+    @Expose
     @SerializedName("semester")
     private String semester;
 
@@ -27,54 +36,29 @@ public class GetExamInfo {
         this.slot = slot;
         this.exam = exam;
         this.semester = semester;
-
     }
 
     public int getEmployeeID() {
         return employeeID;
     }
 
-    public void setEmployeeID(int employeeID) {
-        this.employeeID = employeeID;
-    }
-
     public String getTime() {
         return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getVenue() {
         return venue;
     }
 
-    public void setVenue(String venue) {
-        this.venue = venue;
-    }
-
     public String getSlot() {
         return slot;
-    }
-
-    public void setSlot(String slot) {
-        this.slot = slot;
     }
 
     public String getExam() {
         return exam;
     }
 
-    public void setExam(String exam) {
-        this.exam = exam;
-    }
-
     public String getSemester() {
         return semester;
-    }
-
-    public void setSemester(String semester) {
-        this.semester = semester;
     }
 }

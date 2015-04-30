@@ -1,19 +1,27 @@
 package app.vit.data;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Class {
 
+    @Expose
     @SerializedName("class_number")
     private int classNumber;
+
+    @Expose
     @SerializedName("code")
     private String code;
+
+    @Expose
     @SerializedName("title")
     private String title;
-    @SerializedName("students")
-    private ClassStudent students[];
 
-    public Class(Integer classNumber, String code, String title, ClassStudent[] students) {
+    @Expose
+    @SerializedName("students")
+    private Student students[];
+
+    public Class(Integer classNumber, String code, String title, Student[] students) {
         this.classNumber = classNumber;
         this.code = code;
         this.title = title;
@@ -32,7 +40,7 @@ public class Class {
         return title;
     }
 
-    public ClassStudent[] getStudents() {
+    public Student[] getStudents() {
         return students;
     }
 }

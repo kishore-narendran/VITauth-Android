@@ -14,7 +14,7 @@ import app.vit.corewise.logic.BluetoothChatService;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.vitauth.MainApplication;
 import app.vit.vitauth.R;
-
+import app.vit.vitauth.exam.ExamActivity;
 
 public class BluetoothActivity extends AppCompatActivity {
 
@@ -92,24 +92,13 @@ public class BluetoothActivity extends AppCompatActivity {
                     showProgressDialog(R.string.connecting_bluetooth);
                     mChatService.connect(device);
                     application.setChatService(mChatService);
-                    // startActivity(new Intent(BluetoothActivity.this, RegisterActivity.class));
+                    startActivity(new Intent(BluetoothActivity.this, ExamActivity.class));
                 } else if (resultCode == RESULT_CANCELED) {
                     ToastUtil.showToast(this, R.string.disable_bluetooth);
                 }
                 break;
             default:
                 break;
-        }
-    }
-
-
-    private void showProgressDialog(String message) {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
-        }
-        progressDialog.setMessage(message);
-        if (!progressDialog.isShowing()) {
-            progressDialog.show();
         }
     }
 
