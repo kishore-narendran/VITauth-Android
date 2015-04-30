@@ -19,7 +19,6 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import app.vit.corewise.asynctask.AsyncFingerprint;
 import app.vit.corewise.asynctask.AsyncM1Card;
@@ -236,11 +235,11 @@ public class DeviceFragment extends Fragment {
 
     private void initView() {
         Student[] students = examInfo.getClasses()[examListPosition].getStudents();
-        ArrayList<Student> studentsArrayList = new ArrayList<>(Arrays.asList(students));
+        ArrayList<Student> studentsArrayList = new ArrayList<>();
 
-        for (int i = 0; i < studentsArrayList.size(); ++i) {
-            if (!studentsArrayList.get(i).isAttendance()) {
-                studentsArrayList.remove(i);
+        for (Student item : students) {
+            if (item.isAttendance()) {
+                studentsArrayList.add(item);
             }
         }
 
@@ -274,11 +273,11 @@ public class DeviceFragment extends Fragment {
         studentListAdapter.clear();
 
         Student[] students = examInfo.getClasses()[examListPosition].getStudents();
-        ArrayList<Student> studentsArrayList = new ArrayList<>(Arrays.asList(students));
+        ArrayList<Student> studentsArrayList = new ArrayList<>();
 
-        for (int i = 0; i < studentsArrayList.size(); ++i) {
-            if (!studentsArrayList.get(i).isAttendance()) {
-                studentsArrayList.remove(i);
+        for (Student item : students) {
+            if (item.isAttendance()) {
+                studentsArrayList.add(item);
             }
         }
 
