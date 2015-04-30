@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,10 +25,10 @@ import app.vit.corewise.asynctask.AsyncFingerprint;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnDownCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGenCharListener;
 import app.vit.corewise.asynctask.AsyncFingerprint.OnGetImageListener;
-import app.vit.corewise.asynctask.AsyncFingerprint.OnRegModelListener;
 import app.vit.corewise.asynctask.AsyncM1Card;
 import app.vit.corewise.asynctask.AsyncM1Card.OnReadAtPositionListener;
 import app.vit.corewise.logic.M1CardAPI;
+import app.vit.corewise.utils.DataUtils;
 import app.vit.corewise.utils.ToastUtil;
 import app.vit.data.ExamInfo;
 import app.vit.data.Student;
@@ -173,7 +172,7 @@ public class DeviceFragment extends Fragment {
             public void onGetImageSuccess() {
                 cancelProgressDialog();
                 showProgressDialog(R.string.fingerprint_processing);
-                scanFingerprint.PS_GenChar(1);
+                scanFingerprint.PS_GenChar(2);
             }
 
             @Override
@@ -184,7 +183,8 @@ public class DeviceFragment extends Fragment {
         scanFingerprint.setOnGenCharListener(new OnGenCharListener() {
             @Override
             public void onGenCharSuccess(int bufferId) {
-                byte[] model = Base64.decode(student.getFingerprint(), Base64.URL_SAFE);
+                byte[] model = DataUtils.hexStringTobyte(student.getFingerprint());
+                Log.d(LOG_TAG, "Fingerprint: " + student.getFingerprint());
                 scanFingerprint.PS_DownChar(model);
             }
 
@@ -200,7 +200,7 @@ public class DeviceFragment extends Fragment {
         scanFingerprint.setOnDownCharListener(new OnDownCharListener() {
             @Override
             public void onDownCharSuccess() {
-                scanFingerprint.PS_RegModel();
+                scanFingerprint.PS_Match();
             }
 
             @Override
@@ -212,21 +212,19 @@ public class DeviceFragment extends Fragment {
                 classListPosition = -1;
             }
         });
-        scanFingerprint.setOnRegModelListener(new OnRegModelListener() {
+        scanFingerprint.setOnMatchListener(new AsyncFingerprint.OnMatchListener() {
             @Override
-            public void onRegModelSuccess() {
+            public void onMatchSuccess() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_success);
 
-                student.setAttendance(true);
                 examInfo.getClasses()[examListPosition].getStudents()[classListPosition] = student;
-
                 updateData();
                 updateView();
             }
 
             @Override
-            public void onRegModelFail() {
+            public void onMatchFail() {
                 cancelProgressDialog();
                 ToastUtil.showToast(getActivity(), R.string.fingerprint_verify_fail);
 
